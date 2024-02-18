@@ -21,7 +21,7 @@ instr NODE_Listen
 	
 	*/
 
-	kans OSClisten giosc, "/Node", "ffffffffff", gkx, gky, gktrig, gkyaw, gkpitch, gkroll, gkspeed_P, gkspeed_R, gkdir_P, gkdir_R
+	kans OSClisten giosc, "/Node", "ffffffffff", gky, gkx, gktrig, gkyaw, gkpitch, gkroll, gkspeed_P, gkspeed_R, gkdir_P, gkdir_R
 	
 	gkx portk gkx, 0.02
 	gky portk gky, 0.02

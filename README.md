@@ -40,7 +40,7 @@ const IPAddress destIp(192, 168, 123, 123);  // remote IP of the target device
 const unsigned int destPort = 9000;          // remote port of the target device where the NodeMCU sends OSC to
 ```
 
-Once you have successfully connected the controller to your network (the on-board LED will stop blinking and become a solid blue when connected succesfully) you are ready to send data to the target device.  
+Once you have successfully connected the controller to your network (the on-board LED will stop blinking and become a slightly dimmer, solid blue when connected succesfully) you are ready to send data to the target device.  
 As it stands, the controller will send data to the **/Node** handle and out of the box, the data is sent in the following order:
 1. X-axis of the joystick
 2. Y-axis of the joystick

@@ -28,7 +28,8 @@ seed 0
 
 instr sound
 
-kyaw = (gkyaw/360)+.05
+kyaw = (gkyaw/360)//*0.5
+kyaw = abs(kyaw-0.7)
 
 kfa = 1
 inum random -8, 8
@@ -43,7 +44,8 @@ gindex1 = gindex1%12
 endif
 
 ifreq table gindex1, giscale1
-kfm = ifreq;*kyaw;kpitch  ;using pitch invalue for this effects the modulation, NICE!!
+kfm = ifreq*kyaw;kpitch  ;using pitch invalue for this effects the modulation, NICE!!
+//printk2 kyaw
 inum = (inum)+2
 iamp random 0.05, 0.5
 
@@ -51,9 +53,18 @@ kenv expon iamp, p3, 0.001
 amod oscil kfa*kfm, kfm
 asig oscil kenv, (cpspch(ifreq)*p4)+amod
 
-gaoutL+=(asig)*0.5
-gaoutR+=(asig)*0.5
-;printk2 gkroll
+kx logcurve gkx/1023, 50
+
+kcf = 120+(kx*300)
+
+printk2 kcf
+kres = gky/1023
+
+aOut mvchpf asig, kcf, 0
+
+gaoutL+=(aOut)*0.5
+gaoutR+=(aOut)*0.5
+
 gindex1 = gindex1+inum
 
 endin
@@ -62,7 +73,7 @@ endin
 instr trig
 kpitch = abs((gkpitch/90)*3)+2
 
-kswitch0 = 1
+kswitch0 = gktrig
 ;kmul invalue "metro"
 
 kroll = abs((gkroll/180)*9)+1 ;Roll determines the frequncy of events
@@ -72,10 +83,11 @@ kmetro = p4*kmul
 gkmet1 metro kmetro
 
 if kswitch0 == 1 then
-schedkwhen gkmet1, 0, 10*kmul, "sound", 0.5, 4, kpitch
+schedkwhen gkmet1, 0, 5*kmul, "sound", 0.5, 4, 1
 endif
 
 if kswitch0 == 0 then
+	
 schedkwhen 0, 0, 10, "sound", 0, 1, 4
 endif
 ;printk2 kswitch1
