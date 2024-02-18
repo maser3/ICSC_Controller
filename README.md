@@ -65,8 +65,6 @@ The yaw, pitch and roll are caluclated using [S.J Remington's code](https://gith
 * X and Y readings frome the Joystick are from 0 to 1023
 * The button is simply a binary input
 
-
-## Usage Examples
     
 
 ## License
